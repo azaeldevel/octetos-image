@@ -8,13 +8,12 @@ AM_CFLAGS =\
 	 -Wall\
 	 -g
 
-bin_PROGRAMS = image
 
-image_SOURCES = \
-	develop.cc
+lib_LTLIBRARIES = liboctetos-image.la
 
-image_LDFLAGS = 
+liboctetos_image_la_SOURCES = BMP.cc
 
-image_LDADD = 
+liboctetos_image_la_LIBADD =  $(OCTETOS_CORE_LIBS) 
 
+liboctetos_image_la_LDFLAGS =  $(OCTETOS_CORE_CFLGAS)
 
