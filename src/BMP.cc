@@ -32,6 +32,8 @@ namespace oct::image
 		file.read((char*)&header,14);
 		//
 		
+		
+		file.close();
 	}
 	
 	

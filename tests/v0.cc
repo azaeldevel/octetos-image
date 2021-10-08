@@ -19,8 +19,8 @@ void testDevelop()
 {
 	oct::image::BMP bmp1("tests/image-1.bmp");
 	
-	if(bmp1.get_file().is_open()) CU_ASSERT(true)
-	else CU_ASSERT(false);
+	//if(bmp1.get_file().is_open()) CU_ASSERT(true)
+	//else CU_ASSERT(false);
 	
 	if(bmp1.get_header().signature[0] == 'B') CU_ASSERT(true)
 	else CU_ASSERT(false);
@@ -45,10 +45,10 @@ void testDevelop()
 	else CU_ASSERT(false);
 	if(sizeof(bmp1.get_header().offset) == 4) CU_ASSERT(true)
 	else CU_ASSERT(false);
-	/*if(sizeof(bmp1.get_header()) == 14) CU_ASSERT(true)
-	else CU_ASSERT(false);*/
+	/*if(sizeof(oct::image::BMP::Header) == 14) CU_ASSERT(true)//alineamineto de memoria
+	else CU_ASSERT(false);
+	std::cout << "sizeof(oct::image::BMP::Header) : " << sizeof(oct::image::BMP::Header) << "\n";*/
 	
-	//std::cout << "sizeof(bmp1.get_header()) : " << sizeof(bmp1.get_header()) << "\n";
 	//std::cout << "bmp1.get_header().size : " << bmp1.get_header().size << "\n";
 }
 
