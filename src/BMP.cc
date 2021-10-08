@@ -28,14 +28,8 @@ namespace oct::image
 		file.open(f,std::ios::binary | std::ios::in);
 		if(not file.is_open()) throw oct::core::Exception("No se ha abierto el archivo",__LINE__,__FILE__);
 		
-		//header
-		file >> header.signature[0];
-		file >> header.signature[1];
-		file >> header.size;
-		file >> header.reserved1;	
-		file >> header.reserved2;	
-		file >> header.offset;	
-		
+		//header		
+		file.read((char*)&header,14);
 		//
 		
 	}

@@ -16,8 +16,8 @@ public:
 	{
 		char signature[2];
 		unsigned int size;
-		short reserved1;
-		short reserved2;
+		unsigned short reserved1;
+		unsigned short reserved2;
 		unsigned int offset;
 
 		Header();

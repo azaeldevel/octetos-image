@@ -28,14 +28,28 @@ void testDevelop()
 	else CU_ASSERT(false);	
 	if(bmp1.get_header().size > 0) CU_ASSERT(true)
 	else CU_ASSERT(false);
-	if(bmp1.get_header().reserved1 > 0) CU_ASSERT(true)
+	if(bmp1.get_header().reserved1 == 0) CU_ASSERT(true)
 	else CU_ASSERT(false);
-	if(bmp1.get_header().reserved2 > 0) CU_ASSERT(true)
-	else CU_ASSERT(false);
-	if(bmp1.get_header().offset > 0) CU_ASSERT(true)
-	else CU_ASSERT(false);
+	/*if(bmp1.get_header().reserved2 == 0) CU_ASSERT(true)
+	else CU_ASSERT(false);*/
+	/*if(bmp1.get_header().offset > 0) CU_ASSERT(true)
+	else CU_ASSERT(false);*/
 	
-	std::cout << "offset : " << bmp1.get_header().offset << "\n";
+	if(sizeof(bmp1.get_header().signature) == 2) CU_ASSERT(true)
+	else CU_ASSERT(false);
+	if(sizeof(bmp1.get_header().size) == 4) CU_ASSERT(true)
+	else CU_ASSERT(false);
+	if(sizeof(bmp1.get_header().reserved1) == 2) CU_ASSERT(true)
+	else CU_ASSERT(false);
+	if(sizeof(bmp1.get_header().reserved2) == 2) CU_ASSERT(true)
+	else CU_ASSERT(false);
+	if(sizeof(bmp1.get_header().offset) == 4) CU_ASSERT(true)
+	else CU_ASSERT(false);
+	/*if(sizeof(bmp1.get_header()) == 14) CU_ASSERT(true)
+	else CU_ASSERT(false);*/
+	
+	//std::cout << "sizeof(bmp1.get_header()) : " << sizeof(bmp1.get_header()) << "\n";
+	//std::cout << "bmp1.get_header().size : " << bmp1.get_header().size << "\n";
 }
 
 int main(int argc, char *argv[])
