@@ -1,12 +1,16 @@
 
 #include <iostream>
 
+
+#include <fstream>
+
+
 #include "BMP.hh"
 
 
 namespace oct::image
 {
-	BMP::BMP(const std::string& f)
+	BMP::BMP(const std::filesystem::path& f)
 	{		
 		load(f);
 	}
@@ -15,30 +19,33 @@ namespace oct::image
 	}
 	
 	
-	const std::ifstream& BMP::get_file()const
-	{
-		return file;
-	}
+
 	const BMP::Header& BMP::get_header()const
 	{
 		return header;
 	}
-	void BMP::load(const std::string& f)
+	const BMP::HeaderInfo& BMP::get_header_info()const
 	{
+		return info;
+	}
+	void BMP::load(const std::filesystem::path& f)
+	{
+		std::ifstream file;
 		file.open(f,std::ios::binary | std::ios::in);
 		if(not file.is_open()) throw oct::core::Exception("No se ha abierto el archivo",__LINE__,__FILE__);
 		
-		//header		
-		file.read((char*)&header,14);
 		//
+		file.read((char*)&header,14);
+		file.read((char*)&info,16);
 		
-		
+		//
 		file.close();
 	}
 	
 	
 	
 	
+	/*
 	BMP::Header::Header()
 	{
 		signature[0] = 0;
@@ -48,4 +55,8 @@ namespace oct::image
 		reserved2 = 0;
 		offset = 0;
 	}
+	BMP::HeaderInfo::HeaderInfo() : size(0), width(0), height(0)
+	{
+	}
+	*/
 }

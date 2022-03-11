@@ -2,8 +2,8 @@
 #ifndef OCTETOS_CORE_BMP_HH
 #define OCTETOS_CORE_BMP_HH
 
-#include <fstream>
-#include <string>
+
+#include <filesystem>
 #include <octetos/core/Exception.hh>
 
 namespace oct::image
@@ -20,19 +20,29 @@ public:
 		unsigned short reserved2;
 		unsigned int offset;
 
-		Header();
+		//Header();
+	};
+	struct HeaderInfo
+	{
+		unsigned int size;
+		unsigned int width;
+		unsigned int height;
+		unsigned short planes;
+		unsigned short bits_pixel;
+		
+		//HeaderInfo();
 	};
 public:
-	BMP(const std::string& file);
+	BMP(const std::filesystem::path& file);
 	~BMP();
-	const std::ifstream& get_file()const;
 	const Header& get_header()const;
+	const HeaderInfo& get_header_info()const;
 
-	void load(const std::string& file);
+	void load(const std::filesystem::path& file);
 
 private:
-	std::ifstream file;
 	Header header;
+	HeaderInfo info;
 };
 
 }
