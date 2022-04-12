@@ -7,6 +7,11 @@
 
 int init(void)
 {
+	if(not std::filesystem::exists("../../tests"))
+	{
+		std::cout << "Pare que el oprograma no se esta ejecutando en el directorio de pruebas correspondiente.\n";
+		return 1;
+	}
 	return 0;
 }
 
@@ -90,7 +95,7 @@ void testDevelop()
 	CU_ASSERT(sizeof(bmp1.get_header_info()) == 40);
 	
 	CU_ASSERT(sizeof(BMP::RGB) == 4);
-	std::cout << "sizeof(BMP::RGB) : " << sizeof(BMP::RGB) << "\n";
+	//std::cout << "sizeof(BMP::RGB) : " << sizeof(BMP::RGB) << "\n";
 	CU_ASSERT(bmp1.get_row_size() == 8192);
 	//std::cout << "bmp1.get_row_size : " << bmp1.get_row_size() << "\n";
 	CU_ASSERT(bmp1.get_nums_colors() == 3145728);

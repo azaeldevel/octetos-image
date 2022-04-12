@@ -51,7 +51,7 @@ public:
 		
 		//HeaderInfo();
 	};
-	struct alignas(1) RGB : public oct::image::RGB
+	struct alignas(0) RGB 
 	{
 		unsigned char alpha;
 		unsigned char red;
