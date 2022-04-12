@@ -1,21 +1,20 @@
 
 #include <iostream>
-
-
 #include <fstream>
-
+#include <cmath>
 
 #include "BMP.hh"
 
 
 namespace oct::image
 {
-	BMP::BMP(const std::filesystem::path& f)
+	BMP::BMP(const std::filesystem::path& f) : color_table(NULL)
 	{		
 		load(f);
 	}
 	BMP::~BMP()
 	{
+		delete[] color_table;
 	}
 	
 	
@@ -28,6 +27,14 @@ namespace oct::image
 	{
 		return info;
 	}
+	unsigned int BMP::get_row_size()const
+	{
+		return row_size;
+	}
+	unsigned int BMP::get_nums_colors()const
+	{
+		return num_colors;
+	}
 	void BMP::load(const std::filesystem::path& f)
 	{
 		std::ifstream file;
@@ -36,10 +43,15 @@ namespace oct::image
 		
 		//
 		file.read((char*)&header,14);
-		file.read((char*)&info,16);
+		file.read((char*)&info,40);
+		if(info.bits_pixel < 8) file.read((char*)&num_colors,4);
+		else num_colors = info.image_size;
+		color_table = new BMP::RGB[num_colors];
+		file.read((char*)color_table,num_colors * sizeof(BMP::RGB));
 		
 		//
 		file.close();
+		row_size = (info.width * info.bits_pixel)/sizeof(BMP::RGB);
 	}
 	
 	
